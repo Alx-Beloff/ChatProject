@@ -1,13 +1,13 @@
-import cookieParser from 'cookie-parser';
-import { WebSocketServer } from 'ws';
-import jwt from 'jsonwebtoken';
+const { WebSocketServer } = require('ws');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
-export const wss = new WebSocketServer({
+const wss = new WebSocketServer({
   clientTracking: false,
   noServer: true,
 });
 
-export const upgradeCb = (request, socket, head) => {
+const upgradeCb = (request, socket, head) => {
   socket.on('error', console.error);
 
   cookieParser()(request, {}, () => {
@@ -26,4 +26,9 @@ export const upgradeCb = (request, socket, head) => {
       socket.destroy();
     }
   });
+};
+
+module.exports = {
+  upgradeCb,
+  wss,
 };

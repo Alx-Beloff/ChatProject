@@ -3,6 +3,7 @@ import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Root from './components/ui/Root';
 import ChatPage from './components/pages/ChatPage';
 import MainPage from './components/pages/MainPage';
+import LoginPage from './components/pages/LoginPage';
 
 function App(): JSX.Element {
   const routes = createBrowserRouter([
@@ -21,6 +22,14 @@ function App(): JSX.Element {
         {
           path: '/chat',
           element: <ChatPage />,
+        },
+        {
+          path: '/login',
+          element: <LoginPage />,
+        },
+        {
+          path: '/signup',
+          element: <LoginPage />,
         },
       ],
     },

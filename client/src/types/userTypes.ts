@@ -21,3 +21,8 @@ export type AuthStateType = {
   accessToken: string;
   user: UserType;
 };
+
+export type UserStateType =
+  | { status: 'pending' }
+  | { status: 'guest' }
+  | ({ status: 'logged' } & UserType);

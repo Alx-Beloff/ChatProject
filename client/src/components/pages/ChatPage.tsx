@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import UsersLists from '../ui/UsersLists';
 import ChatComponent from '../ui/ChatComponent';
 
-export default function ChatPage() {
+export default function ChatPage(): JSX.Element {
+  const socketRef = useRef(null);
+  useEffect(() => {
+    socketRef.current = new WebSocket('ws://localhost:3000');
+    const socket = socketRef.current;
+    socket.onmessage = (event: MessageEvent) => {
+      const { type, payload } = JSON.parse(event.data);
+      switch (type) {
+        case 'SET_USERS_FROM_SERVER':
+          break;
+
+        default:
+          break;
+      }
+    };
+  }, []);
+
   const users = [];
   const messages = [];
   const loggedUser = null;

@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+const { createServer } = require('http');
 const config = require('./config/serverConfig');
 
 const app = express();
@@ -21,6 +22,10 @@ const indexRouter = require('./routes/index.routes');
 config(app);
 
 app.use('/', indexRouter);
+
+const server = createServer(app);
+
+server.on('upgrade', upgradeCb);
 
 app.listen(PORT, () => {
   console.log(`App has been started in port ${PORT}...`);

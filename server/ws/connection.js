@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
-import 'dotenv/config';
-import { Message, User } from '../../db/models';
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const { Message, User } = require('../db/models');
 
 const map = new Map();
 

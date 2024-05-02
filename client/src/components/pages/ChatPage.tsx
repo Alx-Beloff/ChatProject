@@ -2,16 +2,27 @@ import React, { useEffect, useRef } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import UsersLists from '../ui/UsersLists';
 import ChatComponent from '../ui/ChatComponent';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { setMessages, setUsers } from '../../redux/slices/messages/messagesSlice';
 
 export default function ChatPage(): JSX.Element {
   const socketRef = useRef(null);
+  const dispatch = useAppDispatch();
+  const messages = useAppSelector((store) => store.messages);
+  const users = [{ id: 1 }];
+  const loggedUser = { id: 1 };
   useEffect(() => {
-    socketRef.current = new WebSocket('ws://localhost:3000');
+    socketRef.current = new WebSocket('ws://localhost:4000');
     const socket = socketRef.current;
     socket.onmessage = (event: MessageEvent) => {
       const { type, payload } = JSON.parse(event.data);
       switch (type) {
         case 'SET_USERS_FROM_SERVER':
+          dispatch(setUsers(payload));
+          break;
+
+        case 'ADD_MESSAGE_FROM_SERVER':
+          dispatch(setMessages(payload));
           break;
 
         default:
@@ -20,9 +31,10 @@ export default function ChatPage(): JSX.Element {
     };
   }, []);
 
-  const users = [];
-  const messages = [];
-  const loggedUser = null;
+  const submitMessage = (input) => {
+    const socket = socketRef.current;
+    socket.send(JSON.stringify({ type: 'ADD_MESSAGE_FROM_CLIENT', payload: input }));
+  };
   return (
     <Container>
       <Row className="justify-content-center align-items-center text-center">
@@ -37,7 +49,6 @@ export default function ChatPage(): JSX.Element {
           </Col>
           <Col xs={10}>
             <ChatComponent messages={messages} loggedUser={loggedUser} />
-            {/* {typingUser && `${typingUser.name} is typing now...`} */}
           </Col>
         </Row>
       </Card>

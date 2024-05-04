@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { checkUserThunk } from './redux/slices/auth/authThunks';
 import Root from './components/ui/Root';
+import PrivateRouter from './components/hocks/PrivateRouter';
 import ChatPage from './components/pages/ChatPage';
 import MainPage from './components/pages/MainPage';
 import LoginPage from './components/pages/LoginPage';
-import { useAppDispatch, useAppSelector } from './redux/hooks';
-import { checkUserThunk } from './redux/slices/auth/authThunks';
-import PrivateRouter from './components/hocks/PrivateRouter';
+import ErrorPage from './components/pages/ErrorPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ function App(): JSX.Element {
     {
       path: '/',
       element: <Root />,
+      errorElement: <ErrorPage />,
       children: [
         {
           element: <PrivateRouter isAllowed={user.status === 'logged'} redirect="/login" />,

@@ -7,7 +7,6 @@ const map = new Map();
 const connectionCb = (socket, request) => {
   const { refreshToken } = request.cookies;
   const { user: userFromJwt } = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-  console.log({ userFromJwt });
   map.set(userFromJwt.id, { ws: socket, user: userFromJwt });
 
   map.forEach(({ ws }) =>

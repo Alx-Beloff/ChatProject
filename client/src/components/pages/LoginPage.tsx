@@ -13,10 +13,8 @@ export default function LoginPage(): JSX.Element {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    const formData = Object.fromEntries(new FormData(e.currentTarget)) as
-      | UserLoginType
-      | UserSignUpType;
-
+    const formData = Object.fromEntries(new FormData(e.currentTarget)) as UserLoginType | UserSignUpType;
+    
     if (pathname === '/signup') {
       void dispatch(signUpThunk(formData as UserSignUpType));
     } else {
@@ -68,7 +66,7 @@ export default function LoginPage(): JSX.Element {
 
                         <Form.Group className="mb-3" controlId="formBasicImg">
                           <Form.Label className="text-center">Аватар</Form.Label>
-                          <Form.Control name="img" type="text" placeholder="Укажите адрес" />
+                          <Form.Control name="file" type="file" placeholder="Выберите фото" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPhone">

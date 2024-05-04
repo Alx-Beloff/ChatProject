@@ -17,7 +17,11 @@ class AuthService {
 
   async signUp(formData: UserSignUpType): Promise<AuthStateType> {
     try {
-      const { data } = await this.apiInstance.post<AuthStateType>('/auth/signup', formData);
+      const { data } = await this.apiInstance.post<AuthStateType>('/auth/signup', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       return data;
     } catch (error) {
       const err = error as AxiosError<Error>;

@@ -12,7 +12,7 @@ export default function ChatPage(): JSX.Element {
   const users = [{ id: 1 }];
   const loggedUser = { id: 1 };
   useEffect(() => {
-    socketRef.current = new WebSocket('ws://localhost:4000');
+    socketRef.current = new WebSocket('ws://localhost:3001');
     const socket = socketRef.current;
     socket.onmessage = (event: MessageEvent) => {
       const { type, payload } = JSON.parse(event.data);

@@ -8,9 +8,7 @@ import { setMessages, setUsers } from '../../redux/slices/messages/messagesSlice
 export default function ChatPage(): JSX.Element {
   const socketRef = useRef(null);
   const dispatch = useAppDispatch();
-  const messages = useAppSelector((store) => store.messages);
-  const users = [{ id: 1 }];
-  const loggedUser = { id: 1 };
+
   useEffect(() => {
     socketRef.current = new WebSocket('ws://localhost:3001');
     const socket = socketRef.current;
@@ -45,10 +43,10 @@ export default function ChatPage(): JSX.Element {
       <Card className="p-4">
         <Row>
           <Col xs={2}>
-            <UsersLists users={users.filter((el) => el.id !== loggedUser.id)} />
+            <UsersLists />
           </Col>
           <Col xs={10}>
-            <ChatComponent messages={messages} loggedUser={loggedUser} />
+            <ChatComponent submitMessage={submitMessage} socketRef={socketRef} />
           </Col>
         </Row>
       </Card>

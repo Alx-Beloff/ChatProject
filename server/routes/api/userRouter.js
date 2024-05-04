@@ -26,14 +26,14 @@ router.post('/signup', upload.single('file'), async (req, res) => {
       // создаем буфер с помощью sharp
       const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
       // создаем файл с помощью fs
-      await fs.writeFile(`./public/${imgName}`, outputBuffer);
+      await fs.writeFile(`./public/img/${imgName}`, outputBuffer);
       // создаем юзера в бд
       const [user, created] = await User.findOrCreate({
         where: { email },
         defaults: {
           username,
           password: await bcrypt.hash(password, 10),
-          img: imgName,
+          img: `http://${process.env.DB_HOST}:${process.env.PORT}/img/${imgName}`,
           tel,
           role,
         },

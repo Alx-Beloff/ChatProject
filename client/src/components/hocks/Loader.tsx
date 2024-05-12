@@ -13,9 +13,8 @@ export default function Loader({ children, isLoading }: LoaderProps): JSX.Elemen
         <svg width={0} height={0}>
           <defs>
             <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#04fc57" />
-              <stop offset="50%" stopColor="#0fcddb" />
-              <stop offset="100%" stopColor="#1d9de7" />
+              <stop offset="0%" stopColor="#7573f0" />
+              <stop offset="100%" stopColor="#4ce1cb" />
             </linearGradient>
           </defs>
         </svg>

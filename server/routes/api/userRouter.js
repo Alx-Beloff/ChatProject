@@ -19,7 +19,31 @@ router.post('/signup', upload.single('file'), async (req, res) => {
     try {
       // проверяем наличие файла
       if (!req.file) {
-        return res.status(400).json({ message: 'File not found' });
+        const [user, created] = await User.findOrCreate({
+          where: { email },
+          defaults: {
+            username,
+            password: await bcrypt.hash(password, 10),
+            img: `http://${process.env.DB_HOST}:${process.env.PORT}/img/defaultAvatar.png`,
+            tel,
+            role,
+          },
+        });
+
+        if (!created) {
+          return res.status(400).json({ message: 'User already exists' });
+        }
+
+        const plainUser = user.get();
+        delete plainUser.password;
+
+        const { accessToken, refreshToken } = generateTokens({ user: plainUser });
+
+        return res
+          .cookie('refreshToken', refreshToken, cookiesConfig.refresh)
+          .status(200)
+          .json({ accessToken, user: plainUser });
+        // return res.status(400).json({ message: 'File not found' });
       }
       // создаем имя файла с расширением webp и привязкой к дате
       const imgName = `${Date.now()}.webp`;

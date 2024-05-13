@@ -1,15 +1,15 @@
-// const router = require('express').Router();
-// const { Restaurant } = require('../../db/models');
+const router = require('express').Router();
+const { Spot } = require('../../db/models');
 // const verifyAccessToken = require('../../middlewares/verifyAccessToken');
 
-// router.get('/', async (req, res) => {
-//   try {
-//     const restaurants = await Restaurant.findAll();
-//     res.status(200).json(restaurants);
-//   } catch ({ message }) {
-//     res.status(400).json({ message });
-//   }
-// });
+router.get('/', async (req, res) => {
+  try {
+    const spots = await Spot.findAll();
+    res.status(200).json(spots);
+  } catch ({ message }) {
+    res.status(400).json({ message });
+  }
+});
 
 // router.get('/restaurants/:id', async (req, res) => {
 //   try {

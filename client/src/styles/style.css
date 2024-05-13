@@ -1,0 +1,155 @@
+.profile-page {
+    /* background-image: url('https://w0.peakpx.com/wallpaper/215/383/HD-wallpaper-minimalistic-colours-minimal-colours-pattern-stock.jpg'); */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .back-button {
+    border: none; /* Убираем границу кнопки */
+    background: none; /* Убираем фон кнопки */
+    cursor: pointer; /* Устанавливаем курсор указателя */
+    padding: 0; /* Убираем отступы вокруг содержимого кнопки */
+  }
+  
+  .back-button:focus {
+    outline: none; /* Убираем фокусовку кнопки */
+  }
+  
+  .back-button:hover {
+    opacity: 0.8; /* Устанавливаем немного прозрачности при наведении */
+  }
+  
+  
+  .profile-image {
+    width: 171px;
+    height: 180px;
+    transition: transform 0.3s ease; 
+    border-radius: 8px;
+    border: 2px solid #536DFE; 
+    
+  }
+  
+  .profile-image:hover {
+    transform: scale(1.1); 
+  }
+  
+  .profile-name {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: bold; /* Жирный шрифт */
+    font-size: 20px; /* Уменьшенный размер шрифта */
+    color: #536DFE; /* Цвет текста как у кнопки */
+    padding: 10px; /* Добавлен отступ */
+    border-radius: 8px; /* Скругленные углы */
+    border: 2px solid #536DFE; /* Обводка как у кнопки */
+    transition: box-shadow 0.15s, transform 0.15s; /* Анимация при наведении и нажатии */
+    user-select: none; /* Запрет на выделение текста */
+    margin-top: 10px;
+  }
+  
+  .profile-name:hover {
+    box-shadow: rgba(83, 109, 254, 0.3) 0 4px 8px, rgba(83, 109, 254, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+  }
+  
+  .profile-name:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+  }
+  
+
+  .profile-p {
+    margin-top: 10px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: bold; /* Жирный шрифт */
+    font-size: 20px; /* Уменьшенный размер шрифта */
+    color: #000; /* Черный цвет текста */
+    padding: 10px; /* Добавлен отступ */
+    border-radius: 8px; /* Скругленные углы */
+    transition: box-shadow 0.15s, transform 0.15s; /* Анимация при наведении и нажатии */
+    user-select: none; /* Запрет на выделение текста */
+  }
+  
+  .profile-p:hover {
+    box-shadow: rgba(83, 109, 254, 0.3) 0 4px 8px, rgba(83, 109, 254, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+  }
+  
+  .profile-p:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+  }
+  
+  
+  /* /////////////////////////////////////////// */
+  
+  .page-button {
+    width: 270px;
+    align-items: center;
+    appearance: none;
+    background-color: #EEF2FF;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: #536DFE;
+    box-shadow: rgba(83, 109, 254, 0.2) 0 2px 4px, rgba(83, 109, 254, 0.15) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #536DFE;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono", monospace;
+    height: 45px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 24px;
+    padding-right: 24px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.15s, transform 0.15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 20px;
+  }
+  
+  .page-button:focus {
+    outline: none;
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(83, 109, 254, 0.4) 0 2px 4px, rgba(83, 109, 254, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  }
+  
+  .page-button:hover {
+    box-shadow: rgba(83, 109, 254, 0.3) 0 4px 8px, rgba(83, 109, 254, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+  }
+  
+  .page-button:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+  }
+  
+  /* //////////////////////////////////////////////// */
+
+
+  .page-h1 {
+    /* Основные стили, подобные заголовку h1 */
+    font-family: "JetBrains Mono", monospace;
+    font-weight: bold;
+    font-size: 30px;
+    color: #000; /* Черный цвет текста */
+    padding: 10px;
+    border: none; /* Удалить рамку */
+    background: none; /* Удалить фон */
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  
+  .page-h1:hover {
+    transform: translateY(-2px);
+  }
+  
+  

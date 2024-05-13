@@ -9,8 +9,8 @@ export default function ChatMessage({ message }): JSX.Element {
   const messageAlignment = isCurrentUser ? 'flex-end' : 'flex-start';
 
   return (
-    <div style={{ display: 'flex', justifyContent: messageAlignment, margin: '5px 15px' }}>
-      <Card style={{ maxWidth: '75%', marginBottom: '10px' }}>
+    <div style={{ display: 'flex', justifyContent: messageAlignment, margin: '10px 15px' }}>
+      <Card style={{ maxWidth: '75%' }}>
         <Card.Body
           style={{
             display: 'flex',

@@ -32,7 +32,7 @@ function App(): JSX.Element {
               element: <MainPage />,
             },
             {
-              path: '/chat',
+              path: '/chat/:spotId',
               element: <ChatPage />,
             },
           ],

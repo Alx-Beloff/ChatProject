@@ -18,7 +18,12 @@ const messageSlice = createSlice({
   initialState,
   reducers: {
     setMessages: (state, action: PayloadAction<MessageType>) => {
-      state.messages = [...state.messages, action.payload];
+      if (Array.isArray(action.payload)) {
+        state.messages = [...action.payload];
+      } else {
+        state.messages = [...state.messages, action.payload];
+      }
+      
     },
     setUsers: (state, action: PayloadAction<UserType>) => {
       const existingUserIndex = state.users.findIndex((el) => el.id === action.payload.id);

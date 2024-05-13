@@ -6,7 +6,6 @@ import { useAppSelector } from '../../redux/hooks';
 export default function UsersLists(): JSX.Element {
   const users = useAppSelector((store) => store.messages.users);
   const users1 = users.flat();
-  console.log(users);
 
   return (
     <Stack>

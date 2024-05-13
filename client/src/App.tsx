@@ -8,6 +8,8 @@ import ChatPage from './components/pages/ChatPage';
 import MainPage from './components/pages/MainPage';
 import LoginPage from './components/pages/LoginPage';
 import ErrorPage from './components/pages/ErrorPage';
+import ProfilePage from './components/pages/ProfilePage';
+import SpotsPage from './components/pages/SpotsPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -35,6 +37,14 @@ function App(): JSX.Element {
               path: '/chat/:spotId',
               element: <ChatPage />,
             },
+            {
+              path: '/profile',
+              element: <ProfilePage />,
+            },
+            {
+              path: '/spots',
+              element: <SpotsPage />,
+            },
           ],
         },
 
@@ -51,6 +61,7 @@ function App(): JSX.Element {
             },
           ],
         },
+
       ],
     },
   ]);

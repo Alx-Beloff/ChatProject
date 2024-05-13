@@ -80,6 +80,7 @@
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
   }
+
   
   
   /* /////////////////////////////////////////// */
@@ -133,7 +134,7 @@
   }
 
   .mainPageButtons {
-    margin-top: 200px;
+    margin-top: 160px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -190,5 +191,63 @@
     object-fit: cover; 
     top: 0; 
     left: 0; 
+  }
+  
+  .qr-code-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Растягиваем контейнер на всю высоту экрана */
+  }
+  
+
+  /* /////////////////////////////////////// */
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .form {
+    width: 300px;
+  }
+  
+  .form-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+  }
+  
+  .form-control:hover,
+  .form-control:focus {
+    border-color: #007bff;
+  }
+  
+  .btn-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-submit:hover {
+    background-color: #0056b3;
   }
   

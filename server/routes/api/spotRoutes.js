@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Spot } = require('../../db/models');
+const { Spot, Message } = require('../../db/models');
 
 // const verifyAccessToken = require('../../middlewares/verifyAccessToken');
 
@@ -12,15 +12,6 @@ router.get('/', async (req, res) => {
   }
 });
 module.exports = router;
-// router.get('/restaurants/:id', async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const restaurant = await Restaurant.findOne({ where: { id } });
-//     res.status(200).json(restaurant);
-//   } catch ({ message }) {
-//     res.status(400).json({ message });
-//   }
-// });
 
 // router.get('/:restaurantId', async (req, res) => {
 //   try {

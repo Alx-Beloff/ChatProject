@@ -28,7 +28,7 @@
     transition: transform 0.3s ease; 
     border-radius: 8px;
     border: 2px solid #536DFE; 
-    
+    object-fit: cover;
   }
   
   .profile-image:hover {
@@ -62,13 +62,13 @@
   .profile-p {
     margin-top: 10px;
     font-family: "JetBrains Mono", monospace;
-    font-weight: bold; /* Жирный шрифт */
-    font-size: 20px; /* Уменьшенный размер шрифта */
-    color: #000; /* Черный цвет текста */
-    padding: 10px; /* Добавлен отступ */
-    border-radius: 8px; /* Скругленные углы */
-    transition: box-shadow 0.15s, transform 0.15s; /* Анимация при наведении и нажатии */
-    user-select: none; /* Запрет на выделение текста */
+    font-weight: bold; 
+    font-size: 20px; 
+    color: #000; 
+    padding: 10px;
+    border-radius: 8px; 
+    transition: box-shadow 0.15s, transform 0.15s; 
+    user-select: none; 
   }
   
   .profile-p:hover {
@@ -144,14 +144,13 @@
 
 
   .page-h1 {
-    /* Основные стили, подобные заголовку h1 */
     font-family: "JetBrains Mono", monospace;
     font-weight: bold;
     font-size: 30px;
-    color: #000; /* Черный цвет текста */
+    color: #000; 
     padding: 10px;
-    border: none; /* Удалить рамку */
-    background: none; /* Удалить фон */
+    border: none;
+    background: none;
     cursor: pointer;
     transition: transform 0.15s ease;
   }
@@ -170,11 +169,14 @@
     align-items: center;
   }
 
+  
   #qrCodeContainer {
+    top: 20%;
     width: 300px;
     height: 300px;
     border-radius: 7px;
     overflow: hidden;
+    position: relative;
   }
 
   #qr-shaded-region {
@@ -182,7 +184,11 @@
   }
 
   video {
-    position: relative;
-    width: auto !important;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    top: 0; 
+    left: 0; 
   }
+  

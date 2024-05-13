@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import OneSpotCard from '../ui/OneSpotCard';
 
 export default function SpotsPage(): JSX.Element {
-  const spots = useAppSelector((store) => store.spots);
+  const spots = useAppSelector((store) => store.spots.spots);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

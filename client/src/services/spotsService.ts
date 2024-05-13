@@ -7,8 +7,6 @@ class SpotsService {
 
   async getSpots(): Promise<SpotType[]> {
     const { data } = await this.apiInstance.get<SpotType[]>('/spots');
-    console.log(data);
-
     return data;
   }
 }

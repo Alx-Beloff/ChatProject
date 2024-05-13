@@ -53,6 +53,7 @@ export default function MainPage(): JSX.Element {
       <Container>
         <Row className="justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
           <Col xs={12} className="text-center">
+            <img src="../../../public/SpotChatLogo.png" alt="logo" width="160" height="160" />
             <h1
               className="mainPage-h1"
               style={{
@@ -64,13 +65,13 @@ export default function MainPage(): JSX.Element {
                 marginBottom: '150px',
               }}
             >
-              Green Iguana SpotChat
+              SpotChat
             </h1>
           </Col>
         </Row>
         <Row className="justify-content-center">
           <div className="scanner">
-            <div id="qrCodeContainer">.</div>
+            <div id="qrCodeContainer"></div>
           </div>
         </Row>
         <div className="mainPageButtons">

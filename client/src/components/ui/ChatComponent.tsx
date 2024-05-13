@@ -5,9 +5,9 @@ import MessageForm from './MessageForm';
 
 export default function ChatComponent({ submitMessage }): JSX.Element {
   return (
-    <Stack gap={3} className="p-3">
-      <MessagesList />
-      <MessageForm submitMessage={submitMessage} />
-    </Stack>
+    <div style={{ height: 'calc(100% - 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }} >
+        <MessagesList />
+        <MessageForm submitMessage={submitMessage} />
+    </div>
   );
 }

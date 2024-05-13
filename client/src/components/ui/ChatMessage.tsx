@@ -9,13 +9,15 @@ export default function ChatMessage({ message }): JSX.Element {
   const messageAlignment = isCurrentUser ? 'flex-end' : 'flex-start';
 
   return (
-    <div style={{ display: 'flex', justifyContent: messageAlignment, marginBottom: '10px' }}>
+    <div style={{ display: 'flex', justifyContent: messageAlignment, margin: '5px 15px' }}>
       <Card style={{ maxWidth: '75%', marginBottom: '10px' }}>
         <Card.Body
           style={{
             display: 'flex',
             alignItems: 'center',
             flexDirection: isCurrentUser ? 'row-reverse' : 'row',
+            overflowWrap: 'anywhere', // Перенос текста в любом месте слова
+            whiteSpace: 'normal', // Переопределение стандартных настроек пробелов
           }}
         >
           {!isCurrentUser && (
@@ -23,7 +25,7 @@ export default function ChatMessage({ message }): JSX.Element {
               <img
                 src={message.User.img}
                 alt="User Avatar"
-                style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+                style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover' }}
                 className="rounded-circle"
               />
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Button, Row, Container, Form } from 'react-bootstrap';
+import { Col, Button, Row, Container, Form, FloatingLabel } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import type { UserLoginType, UserSignUpType } from '../../types/userTypes';
@@ -50,12 +50,7 @@ export default function LoginPage(): JSX.Element {
             ) : (
               <>
                 <div className="d-flex justify-content-center mb-5">
-                  <img
-                    src="../../../public/SpotChatLogo.png"
-                    alt="logo"
-                    width="160"
-                    height="160"
-                  />
+                  <img src="../../../public/SpotChatLogo.png" alt="logo" width="160" height="160" />
                 </div>
                 <h1
                   className="fw-bold mb-4 d-flex justify-content-center"
@@ -67,39 +62,44 @@ export default function LoginPage(): JSX.Element {
                   className=" mb-5 d-flex justify-content-center"
                   style={{ color: 'rgba(0, 0, 0, 0.6)' }}
                 >
-                  Пожалуйста, введите логин и пароль для авторизации!
+                  Пожалуйста, введите email и пароль для авторизации!
                 </p>
               </>
             )}
 
             <div className="mb-3">
               <Form onSubmit={submitHandler}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label className="text-center">Email</Form.Label>
-                  <Form.Control name="email" type="email" placeholder="Введите email" />
+                <Form.Group className="mb-4" controlId="formBasicEmail">
+                  <FloatingLabel className="text-center" label="Email">
+                    <Form.Control name="email" type="email" placeholder="Введите email" />
+                  </FloatingLabel>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Пароль</Form.Label>
-                  <Form.Control name="password" type="password" placeholder="Введите пароль" />
+                <Form.Group className="mb-4" controlId="formBasicPassword">
+                  <FloatingLabel className="text-center" label="Пароль">
+                    <Form.Control name="password" type="password" placeholder="Введите пароль" />
+                  </FloatingLabel>
                 </Form.Group>
 
                 {pathname === '/signup' && (
                   <>
-                    <Form.Group className="mb-3" controlId="formBasicName">
-                      <Form.Label className="text-center">Имя</Form.Label>
-                      <Form.Control name="username" type="text" placeholder="Введите свое имя" />
+                    <Form.Group className="mb-4" controlId="formBasicName">
+                      <FloatingLabel className="text-center" label="Имя">
+                        <Form.Control name="username" type="text" placeholder="Введите свое имя" />
+                      </FloatingLabel>
+                    </Form.Group>
+
+                    <Form.Group className="mb-4" controlId="formBasicPhone">
+                      <FloatingLabel className="text-center" label="Телефон">
+                        <Form.Control name="tel" type="text" placeholder="Введите номер телефона" />
+                      </FloatingLabel>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicImg">
                       <Form.Label className="text-center">Аватар</Form.Label>
-                      <Form.Control name="file" type="file" placeholder="Выберите фото" />
+                      <Form.Control name="file" type="file" />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPhone">
-                      <Form.Label className="text-center">Телефон</Form.Label>
-                      <Form.Control name="tel" type="text" placeholder="Введите номер телефона" />
-                    </Form.Group>
                   </>
                 )}
 

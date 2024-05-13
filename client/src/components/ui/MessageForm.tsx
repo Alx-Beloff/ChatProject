@@ -14,8 +14,8 @@ export default function MessageForm({ submitMessage }): JSX.Element {
         setInput('');
       }}
     >
-      <InputGroup className="mb-3">
-        <Form.Control placeholder="Your message" value={input} onChange={changeHandler} />
+      <InputGroup className="px-3 py-2">
+        <Form.Control placeholder="Сообщение" value={input} onChange={changeHandler} />
         <InputGroup.Text id="basic-addon2">
           <Button variant="outline-primary" type="submit">
             <SendIcon />

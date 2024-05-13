@@ -5,10 +5,12 @@ import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import { BsArrowLeft } from 'react-icons/bs'; // импортируем иконку стрелочки
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
 
 export default function ProfilePage(): JSX.Element {
   const arr = ['Хрючево', 'KFC', "McDonald's", 'Burger King', 'Столовка вонючая'];
   const navigate = useNavigate();
+  const user = useAppSelector((store) => store.auth.user);
 
   return (
     <div className="profile-page">
@@ -21,15 +23,11 @@ export default function ProfilePage(): JSX.Element {
       <Container className="text-center">
         <Row className="justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
           <Col className="text-center mb-3">
-            <Image
-              className="profile-image"
-              src="https://i.pinimg.com/originals/a8/4e/ca/a84eca7b65b0afcc6c17ffcaa2b23ee4.jpg"
-              roundedCircle
-            />
+            <Image className="profile-image" src={user.img} roundedCircle />
           </Col>
           <Row className="justify-content-center">
             <Col sm={6} md={4} className="text-center mb-3">
-              <h1 className="profile-name">Лох без друзей</h1>
+              <h1 className="profile-name">{user.username}</h1>
               <p className="profile-p">Посещенные места:</p>
             </Col>
           </Row>

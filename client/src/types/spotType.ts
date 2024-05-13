@@ -1,4 +1,4 @@
-export type Spot = {
+export type SpotType = {
   id: number;
   name: string;
   address: string;

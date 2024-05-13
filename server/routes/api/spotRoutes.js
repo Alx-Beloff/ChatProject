@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Spot } = require('../../db/models');
+
 // const verifyAccessToken = require('../../middlewares/verifyAccessToken');
 
 router.get('/', async (req, res) => {
@@ -10,7 +11,7 @@ router.get('/', async (req, res) => {
     res.status(400).json({ message });
   }
 });
-
+module.exports = router;
 // router.get('/restaurants/:id', async (req, res) => {
 //   try {
 //     const { id } = req.params;
@@ -82,5 +83,3 @@ router.get('/', async (req, res) => {
 //     res.status(400).json({ message });
 //   }
 // });
-
-// module.exports = router;

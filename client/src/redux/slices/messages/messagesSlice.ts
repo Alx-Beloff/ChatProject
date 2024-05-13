@@ -21,7 +21,13 @@ const messageSlice = createSlice({
       state.messages = [...state.messages, action.payload];
     },
     setUsers: (state, action: PayloadAction<UserType>) => {
-      state.users = [...state.users, action.payload];
+      const existingUserIndex = state.users.findIndex((el) => el.id === action.payload.id);
+
+      if (existingUserIndex === -1) {
+        state.users = [action.payload, ...state.users];
+      } else {
+        state.users[existingUserIndex] = action.payload;
+      }
     },
   },
 });

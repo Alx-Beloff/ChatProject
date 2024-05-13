@@ -1,6 +1,7 @@
 const { WebSocketServer } = require('ws');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const wss = new WebSocketServer({
   clientTracking: false,
@@ -8,13 +9,14 @@ const wss = new WebSocketServer({
 });
 
 const upgradeCb = (request, socket, head) => {
+  console.log('upgrade');
   socket.on('error', console.error);
 
   cookieParser()(request, {}, () => {
-    const { accessToken } = request.cookies;
+    const { refreshToken } = request.cookies;
 
     try {
-      jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+      jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 
       socket.removeListener('error', console.error);
 
@@ -22,6 +24,7 @@ const upgradeCb = (request, socket, head) => {
         wss.emit('connection', ws, request);
       });
     } catch (error) {
+      console.log({ error });
       socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
       socket.destroy();
     }

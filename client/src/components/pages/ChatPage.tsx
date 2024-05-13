@@ -5,6 +5,7 @@ import ChatComponent from '../ui/ChatComponent';
 import { useAppDispatch } from '../../redux/hooks';
 import { setMessages, setUsers } from '../../redux/slices/messages/messagesSlice';
 import AppNavbar from '../ui/AppNavbar';
+import AppModal from '../ui/AppModal';
 
 export default function ChatPage(): JSX.Element {
   const socketRef = useRef(null);
@@ -49,6 +50,7 @@ export default function ChatPage(): JSX.Element {
     >
       <AppNavbar />
       <ChatComponent submitMessage={submitMessage} socketRef={socketRef} />
+      <AppModal />
     </Container>
   );
 }

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { Message, User } = require('../db/models');
+const { Censure } = require('../utils/censure');
 
 const map = new Map();
 
@@ -42,14 +43,29 @@ const connectionCb = async (socket, request) => {
     const { type, payload } = JSON.parse(data);
     switch (type) {
       case 'ADD_MESSAGE_FROM_CLIENT':
-        {
+        if (Censure.isBad(payload)) {
+          const sanitizedPayload = Censure.replace(payload);
+          const newMessage = await Message.create({
+            text: sanitizedPayload,
+            userId: userFromJwt.id,
+            spotId,
+          });
+          const messageWithUser = await Message.findByPk(newMessage.id, { include: User });
+          map.get(spotId).forEach(({ ws }) =>
+            ws.send(
+              JSON.stringify({
+                type: 'ADD_MESSAGE_FROM_SERVER',
+                payload: messageWithUser,
+              }),
+            ),
+          );
+        } else {
           const newMessage = await Message.create({
             text: payload,
             userId: userFromJwt.id,
             spotId,
           });
           const messageWithUser = await Message.findByPk(newMessage.id, { include: User });
-
           map.get(spotId).forEach(({ ws }) =>
             ws.send(
               JSON.stringify({
@@ -60,7 +76,6 @@ const connectionCb = async (socket, request) => {
           );
         }
         break;
-
       default:
         break;
     }

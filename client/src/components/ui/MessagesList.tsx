@@ -5,7 +5,6 @@ import ChatMessage from './ChatMessage';
 
 export default function MessagesList(): JSX.Element {
   const messages = useAppSelector((store) => store.messages.messages);
-  console.log(messages);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

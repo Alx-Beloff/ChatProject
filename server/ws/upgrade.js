@@ -11,7 +11,6 @@ const wss = new WebSocketServer({
 const upgradeCb = (request, socket, head) => {
   console.log('upgrade');
   socket.on('error', console.error);
-
   cookieParser()(request, {}, () => {
     const { refreshToken } = request.cookies;
 

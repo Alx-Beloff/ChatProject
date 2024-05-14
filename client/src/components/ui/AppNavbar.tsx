@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import BackIcon from '../../../public/icons8-back-50.png';
 import DotsIcon from '../../../public/icons8-dots-50.png';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import getSpotsThunk from '../../redux/slices/spots/spotsThunks';
+import { getSpotsThunk } from '../../redux/slices/spots/spotsThunks';
 import { toggleModal } from '../../redux/slices/spots/spotsSlice';
 
 export default function AppNavbar(): JSX.Element {

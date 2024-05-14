@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
-import getSpotsThunk from '../../redux/slices/spots/spotsThunks';
+import { getSpotsThunk } from '../../redux/slices/spots/spotsThunks';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import OneSpotCard from '../ui/OneSpotCard';
 

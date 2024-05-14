@@ -31,7 +31,8 @@ router.post('/signup', upload.single('file'), async (req, res) => {
         });
 
         if (!created) {
-          return res.status(400).json({ message: 'User already exists' });
+          
+          return res.status(400).json({ message: 'Пользователь с таким email уже существует' });
         }
 
         const plainUser = user.get();
@@ -64,7 +65,7 @@ router.post('/signup', upload.single('file'), async (req, res) => {
       });
 
       if (!created) {
-        return res.status(400).json({ message: 'User already exists' });
+        return res.status(400).json({ message: 'Пользователь с таким email уже существует' });
       }
 
       const plainUser = user.get();
@@ -94,7 +95,7 @@ router.post('/login', async (req, res) => {
       });
 
       if (!(await bcrypt.compare(password, user.password))) {
-        return res.status(401).json({ message: 'Incorrect password' });
+        return res.status(401).json({ message: 'Неверный пароль' });
       }
 
       const plainUser = user.get();
@@ -108,7 +109,7 @@ router.post('/login', async (req, res) => {
         .json({ accessToken, user: plainUser });
     } catch (e) {
       console.log(e);
-      return res.sendStatus(500);
+      return res.status(500).json({ message: 'Неверный логин/пароль' });
     }
   }
   return res.sendStatus(500);

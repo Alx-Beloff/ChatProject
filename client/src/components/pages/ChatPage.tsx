@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import ChatComponent from '../ui/ChatComponent';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setMessages, setUsers } from '../../redux/slices/messages/messagesSlice';
 import AppNavbar from '../ui/AppNavbar';
 import AppModal from '../ui/AppModal';

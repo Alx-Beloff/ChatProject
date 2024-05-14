@@ -5,3 +5,6 @@ export type SpotType = {
   description: string;
   img: string;
 };
+
+
+export type SpotFormType = Omit<SpotType, 'id'>;

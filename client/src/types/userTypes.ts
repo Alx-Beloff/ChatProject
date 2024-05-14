@@ -25,4 +25,4 @@ export type AuthStateType = {
 export type UserStateType =
   | { status: 'pending' }
   | { status: 'guest' }
-  | ({ status: 'logged' } & UserType);
+  | ({ status: 'logged'; img: string; username: string } & UserType);

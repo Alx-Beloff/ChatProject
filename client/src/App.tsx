@@ -10,6 +10,8 @@ import LoginPage from './components/pages/LoginPage';
 import ErrorPage from './components/pages/ErrorPage';
 import ProfilePage from './components/pages/ProfilePage';
 import SpotsPage from './components/pages/SpotsPage';
+import QrCodePage from './components/pages/QrCodePage';
+import AdminPage from './components/pages/AdminPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -49,6 +51,20 @@ function App(): JSX.Element {
         },
 
         {
+          element: <PrivateRouter isAllowed={user.status === 'logged' && user.role === 'admin'} />,
+          children: [
+            {
+              path: '/qr',
+              element: <QrCodePage />,
+            },
+            {
+              path: '/adminPage',
+              element: <AdminPage />,
+            },
+          ],
+        },
+
+        {
           element: <PrivateRouter isAllowed={user.status === 'guest'} />,
           children: [
             {
@@ -61,7 +77,6 @@ function App(): JSX.Element {
             },
           ],
         },
-
       ],
     },
   ]);

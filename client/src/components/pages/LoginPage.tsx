@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Button, Row, Container, Form, FloatingLabel } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
@@ -10,6 +10,27 @@ export default function LoginPage(): JSX.Element {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [formattedTel, setFormattedTel] = useState('');
+
+  const handleTelChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const tel = e.target.value.replace(/\D/g, '');
+    let formatted = '';
+
+    if (tel.length >= 1) {
+      formatted = '+7 (' + tel.substring(1, 4);
+    }
+    if (tel.length >= 4) {
+      formatted += ') ' + tel.substring(4, 7);
+    }
+    if (tel.length >= 7) {
+      formatted += ' ' + tel.substring(7, 9);
+    }
+    if (tel.length >= 9) {
+      formatted += '-' + tel.substring(9, 11);
+    }
+
+    setFormattedTel(formatted);
+  };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -25,7 +46,7 @@ export default function LoginPage(): JSX.Element {
     if (formData.password && formData.password.length < 6) {
       return dispatch(setError('Пароль должен быть не менее 6 символов'));
     }
-    
+
     if (pathname === '/signup') {
       if (!formData.username || formData.username.length < 1) {
         return dispatch(setError('Введите имя чтобы зарегистрироваться'));
@@ -36,8 +57,8 @@ export default function LoginPage(): JSX.Element {
       if (formData.tel && formData.tel === '+7') {
         return dispatch(setError('Введите номер телефона чтобы зарегистрироваться'));
       }
-      if (formData.tel && !/^(\+|8)\d{11}$/.test(formData.tel)) {
-        return dispatch(setError('Телефон должен быть в формате +7 999 999 99 99'));
+      if (formData.tel && !/^.{18}$/.test(formData.tel)) {
+        return dispatch(setError('Телефон должен быть в формате +7 (999) 999 99-99'));
       }
       void dispatch(signUpThunk(formData));
     } else {
@@ -114,8 +135,9 @@ export default function LoginPage(): JSX.Element {
                       <FloatingLabel className="text-center" label="Телефон">
                         <Form.Control
                           name="tel"
-                          type="text"
-                          defaultValue="+7"
+                          type="tel"
+                          value={formattedTel}
+                          onChange={handleTelChange}
                           placeholder="Введите номер телефона"
                         />
                       </FloatingLabel>

@@ -1,26 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Button, Row, Container, Form, FloatingLabel } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import type { UserLoginType, UserSignUpType } from '../../types/userTypes';
 import { loginThunk, signUpThunk } from '../../redux/slices/auth/authThunks';
+import { setError } from '../../redux/slices/auth/authSlice';
 
 export default function LoginPage(): JSX.Element {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [formattedTel, setFormattedTel] = useState('');
+
+  const handleTelChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const tel = e.target.value.replace(/\D/g, '');
+    let formatted = '';
+
+    if (tel.length >= 1) {
+      formatted = '+7 (' + tel.substring(1, 4);
+    }
+    if (tel.length >= 4) {
+      formatted += ') ' + tel.substring(4, 7);
+    }
+    if (tel.length >= 7) {
+      formatted += ' ' + tel.substring(7, 9);
+    }
+    if (tel.length >= 9) {
+      formatted += '-' + tel.substring(9, 11);
+    }
+
+    setFormattedTel(formatted);
+  };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    const formData = Object.fromEntries(new FormData(e.currentTarget)) as
-      | UserLoginType
-      | UserSignUpType;
+    const formData = Object.fromEntries(new FormData(e.currentTarget)) as UserSignUpType;
+
+    if (formData.email.length < 3) {
+      return dispatch(setError('Введите email'));
+    }
+    if (formData.password === '') {
+      return dispatch(setError('Введите пароль'));
+    }
+    if (formData.password && formData.password.length < 6) {
+      return dispatch(setError('Пароль должен быть не менее 6 символов'));
+    }
 
     if (pathname === '/signup') {
-      void dispatch(signUpThunk(formData as UserSignUpType));
+      if (!formData.username || formData.username.length < 1) {
+        return dispatch(setError('Введите имя чтобы зарегистрироваться'));
+      }
+      if (formData.username && formData.username.length > 30) {
+        return dispatch(setError('Имя должно быть не более 30 символов'));
+      }
+      if (formData.tel && formData.tel === '+7') {
+        return dispatch(setError('Введите номер телефона чтобы зарегистрироваться'));
+      }
+      if (formData.tel && !/^.{18}$/.test(formData.tel)) {
+        return dispatch(setError('Телефон должен быть в формате +7 (999) 999 99-99'));
+      }
+      void dispatch(signUpThunk(formData));
     } else {
-      void dispatch(loginThunk(formData as UserLoginType));
+      void dispatch(loginThunk(formData));
     }
   };
 
@@ -91,7 +133,13 @@ export default function LoginPage(): JSX.Element {
 
                     <Form.Group className="mb-4" controlId="formBasicPhone">
                       <FloatingLabel className="text-center" label="Телефон">
-                        <Form.Control name="tel" type="text" placeholder="Введите номер телефона" />
+                        <Form.Control
+                          name="tel"
+                          type="tel"
+                          value={formattedTel}
+                          onChange={handleTelChange}
+                          placeholder="Введите номер телефона"
+                        />
                       </FloatingLabel>
                     </Form.Group>
 
@@ -99,7 +147,6 @@ export default function LoginPage(): JSX.Element {
                       <Form.Label className="text-center">Аватар</Form.Label>
                       <Form.Control name="file" type="file" />
                     </Form.Group>
-
                   </>
                 )}
 

@@ -14,7 +14,7 @@ type SpotItemProps = {
 export default function OneSpotCard({ spot }: SpotItemProps): JSX.Element {
   return (
     <div>
-      <Card sx={{ maxWidth: 300, maxHeight: 500 }}>
+      <Card sx={{ width: 300, maxHeight: 500 }}>
         <CardMedia sx={{ height: 140 }} image={spot.img} title="green iguana" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

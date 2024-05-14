@@ -2,39 +2,77 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useAppSelector } from '../../redux/hooks';
 
+
 export default function ChatMessage({ message }): JSX.Element {
   const loggedUser = useAppSelector((store) => store.auth.user);
 
   const isCurrentUser = message.User.username === loggedUser.username;
   const messageAlignment = isCurrentUser ? 'flex-end' : 'flex-start';
 
+  const messageTime = message.updatedAt
+    ? new Date(message.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    : '';
+
   return (
-    <div style={{ display: 'flex', justifyContent: messageAlignment, margin: '10px 15px' }}>
-      <Card style={{ maxWidth: '75%' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: messageAlignment,
+        margin: '15px 15px 0px 70px',
+        height: '50%',
+      }}
+    >
+      <Card style={{ maxWidth: '85%', position: 'relative', borderColor: 'transparent' }}>
         <Card.Body
           style={{
             display: 'flex',
             alignItems: 'center',
             flexDirection: isCurrentUser ? 'row-reverse' : 'row',
-            overflowWrap: 'anywhere', // Перенос текста в любом месте слова
-            whiteSpace: 'normal', // Переопределение стандартных настроек пробелов
+            overflowWrap: 'anywhere',
+            whiteSpace: 'normal',
+            backgroundColor: isCurrentUser ? '#44d7b6' : '#f4f3f3',
+            borderRadius: '20px',
+            padding: '10px 20px',
           }}
         >
           {!isCurrentUser && (
-            <div style={{ marginRight: '10px' }}>
+            <div style={{ marginRight: '5px' }}>
               <img
                 src={message.User.img}
                 alt="User Avatar"
-                style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover' }}
+                style={{
+                  width: '50px',
+                  height: '50px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  position: 'absolute',
+                  left: '-60px',
+                  bottom: '15px',
+                }}
                 className="rounded-circle"
               />
             </div>
           )}
           <div>
             {!isCurrentUser && (
-              <Card.Subtitle className="mb-2 text-muted">{message.User.username}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted" style={{ padding: '1px 0px 1px' }}>
+                {message.User.username}
+              </Card.Subtitle>
             )}
-            <Card.Text>{message.text}</Card.Text>
+            <Card.Text style={{ color: isCurrentUser ? 'white' : 'black' }}>
+              {message.text}
+            </Card.Text>
+          </div>
+          <div
+            style={{
+              position: 'absolute',
+              bottom: -15,
+              right: 15,
+              fontSize: '9px',
+              color: 'gray',
+            }}
+          >
+            {messageTime}
           </div>
         </Card.Body>
       </Card>

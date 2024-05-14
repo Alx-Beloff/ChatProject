@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { BsCamera, BsPerson, BsBuilding } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Html5Qrcode } from 'html5-qrcode';
+import { useAppSelector } from '../../redux/hooks';
 
 export default function MainPage(): JSX.Element {
   const navigate = useNavigate();
+  const user = useAppSelector((store) => store.auth.user);
 
   const [isEnabled, setEnabled] = useState(false);
   const [qrLink, setQrLink] = useState('');
@@ -14,7 +16,7 @@ export default function MainPage(): JSX.Element {
     const config = { fps: 10, qrbox: { width: 200, height: 200 } };
     const html5QrCode = new Html5Qrcode('qrCodeContainer');
 
-    const qrScannerStop = () => {
+    const qrScannerStop = (): void => {
       if (html5QrCode && html5QrCode.isScanning) {
         html5QrCode
           .stop()
@@ -23,14 +25,17 @@ export default function MainPage(): JSX.Element {
       }
     };
 
-    const qrCodeSuccess = (decodedText) => {
-      console.log(decodedText);
-      navigate('/chat');
+    const qrCodeSuccess = (decodedText: string): void => {
+      const equalSignIndex = decodedText.indexOf('=');
+      const link = decodedText.substring(0, equalSignIndex);
+      navigate(`/${link}`);
       setEnabled(false);
     };
 
     if (isEnabled) {
-      void html5QrCode.start({ facingMode: 'environment' }, config, qrCodeSuccess);
+      void html5QrCode.start({ facingMode: 'environment' }, config, qrCodeSuccess, (error) =>
+        console.error('QR Code error:', error),
+      );
       setQrLink('');
     } else {
       qrScannerStop();
@@ -40,6 +45,7 @@ export default function MainPage(): JSX.Element {
       qrScannerStop();
     };
   }, [isEnabled, navigate]);
+
   return (
     <div
       className="mainPage-container"
@@ -71,28 +77,38 @@ export default function MainPage(): JSX.Element {
         </Row>
         <Row className="justify-content-center">
           <div className="scanner">
-            <div id="qrCodeContainer"></div>
+            <div id="qrCodeContainer">.</div>
           </div>
         </Row>
         <div className="mainPageButtons">
-          <Row className="justify-content-center">
-            <Col xs={12} sm={6} md={4} className="text-center mb-3">
-              {qrLink && <div className="qr-link">{qrLink}</div>}
-              <button type="button" onClick={() => setEnabled(!isEnabled)} className="page-button">
-                <BsCamera style={{ marginRight: '5px', marginBottom: '5px' }} /> Scan QR
+          <Col xs={12} sm={6} md={4} className="text-center mb-3">
+            {user.status === 'logged' && user.role === 'admin' && (
+              <button
+                type="button"
+                className="page-button"
+                style={{ fontWeight: 'bold' }}
+                onClick={() => navigate('/adminPage')}
+              >
+                Admin Page
               </button>
-            </Col>
-            <Col xs={12} sm={6} md={4} className="text-center mb-3">
-              <button type="button" className="page-button" onClick={() => navigate('/profile')}>
-                <BsPerson style={{ marginRight: '5px', marginBottom: '5px' }} /> Личный кабинет
-              </button>
-            </Col>
-            <Col xs={12} sm={6} md={4} className="text-center mb-3">
-              <button type="button" className="page-button" onClick={() => navigate('/spots')}>
-                <BsBuilding style={{ marginRight: '5px', marginBottom: '5px' }} /> Все заведения
-              </button>
-            </Col>
-          </Row>
+            )}
+          </Col>
+          <Col xs={12} sm={6} md={4} className="text-center mb-3">
+            {qrLink && <div className="qr-link">{qrLink}</div>}
+            <button type="button" onClick={() => setEnabled(!isEnabled)} className="page-button">
+              <BsCamera style={{ marginRight: '5px', marginBottom: '5px' }} /> Scan QR
+            </button>
+          </Col>
+          <Col xs={12} sm={6} md={4} className="text-center mb-3">
+            <button type="button" className="page-button" onClick={() => navigate('/profile')}>
+              <BsPerson style={{ marginRight: '5px', marginBottom: '5px' }} /> Личный кабинет
+            </button>
+          </Col>
+          <Col xs={12} sm={6} md={4} className="text-center mb-3">
+            <button type="button" className="page-button" onClick={() => navigate('/spots')}>
+              <BsBuilding style={{ marginRight: '5px', marginBottom: '5px' }} /> Все заведения
+            </button>
+          </Col>
         </div>
       </Container>
     </div>

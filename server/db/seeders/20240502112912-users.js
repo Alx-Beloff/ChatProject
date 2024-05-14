@@ -1,5 +1,6 @@
 /** @type {import('sequelize-cli').Migration} */
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -18,18 +19,18 @@ module.exports = {
         {
           username: 'Admin',
           email: 'admin@spotchat.com',
-          password: await bcrypt.hash('123', 11),
-          img: 'https://i.siteapi.org/9Fu_gIz7bXiyNhfBS7KV0ABHzI0=/0x36:500x436/center/top/filters:fill(transparent):format(png)/ca6b8ca1a6c0173.s.siteapi.org/img/cc8f31fc0ed4ed61d64c2926a26166c16f93ce95.jpg',
+          password: await bcrypt.hash('123456', 11),
+          img: `http://${process.env.DB_HOST}:${process.env.PORT}/img/adminAvatar.jpeg`,
           tel: '+7 (777) 777 77-77',
           role: 'admin',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          username: 'Петр Петров',
-          email: 'p@p',
-          password: await bcrypt.hash('123', 11),
-          img: 'https://peterburg.center/sites/default/files/0-peter-1.jpg',
+          username: 'Петр 1',
+          email: 'petya1@spb.ru',
+          password: await bcrypt.hash('123456', 11),
+          img: 'https://obrazovaka.ru/wp-content/uploads/2014/08/Petr-I.jpg',
           tel: '+7 (111) 111 11-11',
           role: 'user',
           createdAt: new Date(),
@@ -37,10 +38,20 @@ module.exports = {
         },
         {
           username: 'Иван Иванов',
-          email: 'i@i',
-          password: await bcrypt.hash('123', 11),
-          img: 'https://xsgames.co/randomusers/assets/avatars/male/46.jpg',
+          email: 'v@mail.ru',
+          password: await bcrypt.hash('123456', 11),
+          img: `http://${process.env.DB_HOST}:${process.env.PORT}/img/seeduser1.jpeg`,
           tel: '+7 (915) 121 21-22',
+          role: 'user',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          username: 'Ирина',
+          email: 'i@yandex.ru',
+          password: await bcrypt.hash('123456', 11),
+          img: `http://${process.env.DB_HOST}:${process.env.PORT}/img/seeduser2.jpeg`,
+          tel: '+7 (953) 856 74-47',
           role: 'user',
           createdAt: new Date(),
           updatedAt: new Date(),

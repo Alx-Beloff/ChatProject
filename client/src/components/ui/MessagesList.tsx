@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Stack } from 'react-bootstrap';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAppSelector } from '../../redux/hooks';
 import ChatMessage from './ChatMessage';
 
@@ -14,13 +15,29 @@ export default function MessagesList(): JSX.Element {
   }, [messages]);
 
   return (
-    <div className="messages-list-wrapper overflow-auto m-">
+    <motion.div
+      className="messages-list-wrapper overflow-auto m-"
+      style={{ backgroundColor: '#fcfcfc' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <Stack gap={2}>
-        {messages.map((message) => (
-          <ChatMessage message={message} key={message.id} />
-        ))}
+        <AnimatePresence>
+          {messages.map((message) => (
+            <motion.div
+              key={message.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChatMessage message={message} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </Stack>
       <div ref={messagesEndRef} />
-    </div>
+    </motion.div>
   );
 }

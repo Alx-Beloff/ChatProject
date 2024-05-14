@@ -31,17 +31,47 @@ export default function AppModal({ title }): JSX.Element {
             <img
               src={selectedUser.img}
               alt="User Avatar"
-              style={{ width: '200px', height: '200px', borderRadius: '50%', objectFit: 'cover' }}
+              style={{
+                width: '200px',
+                height: '200px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                marginBottom: '20px',
+              }}
               className="rounded-circle"
             />
-            <div style={{ fontSize: '40px', fontWeight: 'bold' }}>{selectedUser.username}</div>
-            <div>{selectedUser.email}</div>
-            <div>{selectedUser.tel}</div>
+            <div style={{ fontSize: '40px', fontWeight: 'bold', marginBottom: '10px' }}>
+              {selectedUser.username}
+            </div>
+            <div
+              style={{
+                borderBottom: '1px solid rgba(128, 128, 128, 0.2)',
+                width: '70%',
+                marginBottom: '10px',
+                margin: 'auto',
+              }}
+            />
+            <div
+              style={{
+                fontSize: '20px',
+                textAlign: 'left',
+                marginTop: '30px',
+                marginLeft: '70px',
+                marginBottom: '10px',
+              }}
+            >{`Email: ${selectedUser.email}`}</div>
+            <div
+              style={{ fontSize: '20px', textAlign: 'left', marginLeft: '70px' }}
+            >{`Телефон: ${selectedUser.tel}`}</div>
           </div>
         ) : (
           <Stack>
             {usersFlat.map((user) => (
-              <div className="p-2" key={user.id} onClick={() => handleUserClick(user)}>
+              <div
+                className="p-2 d-flex align-items-center"
+                key={user.id}
+                onClick={() => handleUserClick(user)}
+              >
                 <img
                   src={user.img}
                   alt="User Avatar"
@@ -53,7 +83,7 @@ export default function AppModal({ title }): JSX.Element {
                   }}
                   className="rounded-circle"
                 />
-                {user.username}
+                <div style={{ marginLeft: '10px', fontSize: '20px' }}>{user.username}</div>
               </div>
             ))}
           </Stack>

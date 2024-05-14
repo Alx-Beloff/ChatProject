@@ -5,12 +5,16 @@ import type { MessageType } from '../../../types/messageType';
 
 type SpotsState = {
   spots: SpotType[];
+  isModalOpen: boolean;
+  showButton: boolean;
   userMessages: MessageType[];
   filtredSpots: number[];
 };
 
 const initialState: SpotsState = {
   spots: [],
+  isModalOpen: false,
+  showButton: false,
   userMessages: [],
   filtredSpots: [],
 };
@@ -18,7 +22,14 @@ const initialState: SpotsState = {
 const spotsSlice = createSlice({
   name: 'spots',
   initialState,
-  reducers: {},
+  reducers: {
+    toggleModal: (state, action) => {
+      state.isModalOpen = action.payload;
+    },
+    showButton: (state, action) => {
+      state.showButton = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getSpotsThunk.fulfilled, (state, action) => {
@@ -35,5 +46,7 @@ const spotsSlice = createSlice({
       });
   },
 });
+
+export const { toggleModal, showButton } = spotsSlice.actions;
 
 export default spotsSlice.reducer;

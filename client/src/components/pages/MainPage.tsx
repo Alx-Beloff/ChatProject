@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { BsCamera, BsPerson, BsBuilding } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Html5Qrcode } from 'html5-qrcode';
 import { useAppSelector } from '../../redux/hooks';
 
@@ -45,6 +45,7 @@ export default function MainPage(): JSX.Element {
       qrScannerStop();
     };
   }, [isEnabled, navigate]);
+
   return (
     <div
       className="mainPage-container"

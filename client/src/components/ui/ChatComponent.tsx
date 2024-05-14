@@ -5,9 +5,16 @@ import MessageForm from './MessageForm';
 
 export default function ChatComponent({ submitMessage }): JSX.Element {
   return (
-    <div style={{ height: 'calc(100% - 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }} >
-        <MessagesList />
-        <MessageForm submitMessage={submitMessage} />
+    <div
+      style={{
+        height: 'calc(100% - 75px)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+      }}
+    >
+      <MessagesList />
+      <MessageForm submitMessage={submitMessage} />
     </div>
   );
 }

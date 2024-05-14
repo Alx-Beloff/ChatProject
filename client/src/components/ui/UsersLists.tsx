@@ -1,6 +1,5 @@
 import React from 'react';
 import { Stack } from 'react-bootstrap';
-import DotOnlineIcon from './icons/DotOnlineIcon';
 import { useAppSelector } from '../../redux/hooks';
 
 export default function UsersLists(): JSX.Element {
@@ -12,7 +11,6 @@ export default function UsersLists(): JSX.Element {
       <h6>Users online</h6>
       {users1.map((user) => (
         <div className="p-2" key={user.id}>
-          <DotOnlineIcon />
           {user.username}
         </div>
       ))}

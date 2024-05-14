@@ -15,12 +15,12 @@ export default function MessagesList(): JSX.Element {
 
   return (
     <div className="messages-list-wrapper overflow-auto m-">
-      <Stack>
+      <Stack gap={2}>
         {messages.map((message) => (
-          <ChatMessage message={message} key={message.id}/>
+          <ChatMessage message={message} key={message.id} />
         ))}
       </Stack>
-      <div ref={messagesEndRef} /> {/* Элемент, который мы будем прокручивать вниз */}
+      <div ref={messagesEndRef} />
     </div>
   );
 }

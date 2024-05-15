@@ -2,7 +2,6 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useAppSelector } from '../../redux/hooks';
 
-
 export default function ChatMessage({ message }): JSX.Element {
   const loggedUser = useAppSelector((store) => store.auth.user);
 
@@ -22,7 +21,15 @@ export default function ChatMessage({ message }): JSX.Element {
         height: '50%',
       }}
     >
-      <Card style={{ maxWidth: '85%', position: 'relative', borderColor: 'transparent' }}>
+      <Card
+        style={{
+          maxWidth: '85%',
+          position: 'relative',
+          borderColor: 'none',
+          border: '0px solid transparent',
+          borderRadius: '20px',
+        }}
+      >
         <Card.Body
           style={{
             display: 'flex',
@@ -30,9 +37,10 @@ export default function ChatMessage({ message }): JSX.Element {
             flexDirection: isCurrentUser ? 'row-reverse' : 'row',
             overflowWrap: 'anywhere',
             whiteSpace: 'normal',
-            backgroundColor: isCurrentUser ? '#44d7b6' : '#f4f3f3',
+            backgroundColor: isCurrentUser ? '#50d5cf' : '#ffffff',
             borderRadius: '20px',
             padding: '10px 20px',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.15)',
           }}
         >
           {!isCurrentUser && (
@@ -47,7 +55,7 @@ export default function ChatMessage({ message }): JSX.Element {
                   objectFit: 'cover',
                   position: 'absolute',
                   left: '-60px',
-                  bottom: '15px',
+                  bottom: '1px',
                 }}
                 className="rounded-circle"
               />

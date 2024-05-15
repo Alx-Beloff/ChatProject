@@ -2,21 +2,27 @@ import React, { useEffect, useRef } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import ChatComponent from '../ui/ChatComponent';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch } from '../../redux/hooks';
 import { setMessages, setUsers } from '../../redux/slices/messages/messagesSlice';
 import AppNavbar from '../ui/AppNavbar';
 import AppModal from '../ui/AppModal';
 
+type MessageData = {
+  type: string;
+  payload: any;
+};
+
 export default function ChatPage(): JSX.Element {
-  const socketRef = useRef(null);
+  const socketRef = useRef<WebSocket | null>(null);
   const dispatch = useAppDispatch();
-  const { spotId } = useParams();
+  const { spotId } = useParams<{ spotId: string }>();
 
   useEffect(() => {
     socketRef.current = new WebSocket(`${import.meta.env.VITE_WS_URL}/?spotId=${spotId}`);
     const socket = socketRef.current;
+
     socket.onmessage = (event: MessageEvent) => {
-      const { type, payload } = JSON.parse(event.data);
+      const { type, payload } = JSON.parse(event.data) as MessageData;
 
       switch (type) {
         case 'SET_USERS_FROM_SERVER':
@@ -24,9 +30,6 @@ export default function ChatPage(): JSX.Element {
           break;
 
         case 'ADD_MESSAGE_FROM_SERVER':
-          dispatch(setMessages(payload));
-          break;
-
         case 'SET_HISTORY_FROM_SERVER':
           dispatch(setMessages(payload));
           break;
@@ -35,14 +38,21 @@ export default function ChatPage(): JSX.Element {
           break;
       }
     };
-  }, []);
 
-  const submitMessage = (input) => {
-    if (input !== '') {
+    return () => {
+      socket.close();
+    };
+  }, [dispatch, spotId]);
+
+  const submitMessage = (input: string) => {
+    if (input.trim() !== '') {
       const socket = socketRef.current;
-      socket.send(JSON.stringify({ type: 'ADD_MESSAGE_FROM_CLIENT', payload: input }));
+      if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify({ type: 'ADD_MESSAGE_FROM_CLIENT', payload: input }));
+      }
     }
   };
+
   return (
     <Container
       style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}

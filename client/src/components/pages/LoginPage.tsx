@@ -17,16 +17,16 @@ export default function LoginPage(): JSX.Element {
     let formatted = '';
 
     if (tel.length >= 1) {
-      formatted = '+7 (' + tel.substring(1, 4);
+      formatted = `+7 (${tel.substring(1, 4)}`;
     }
     if (tel.length >= 4) {
-      formatted += ') ' + tel.substring(4, 7);
+      formatted += `) ${tel.substring(4, 7)}`;
     }
     if (tel.length >= 7) {
-      formatted += ' ' + tel.substring(7, 9);
+      formatted += ` ${tel.substring(7, 9)}`;
     }
     if (tel.length >= 9) {
-      formatted += '-' + tel.substring(9, 11);
+      formatted += `-${tel.substring(9, 11)}`;
     }
 
     setFormattedTel(formatted);
@@ -78,7 +78,7 @@ export default function LoginPage(): JSX.Element {
                 </div>
                 <h2
                   className="fw-bold mb-4 d-flex justify-content-center"
-                  style={{ color: '#7573f0', textShadow: '0 0 1px rgba(0, 0, 0, 0.11)' }}
+                  style={{ color: '#313131', textShadow: '0 0 1px rgba(0, 0, 0, 0.11)' }}
                 >
                   Регистрация
                 </h2>
@@ -92,11 +92,11 @@ export default function LoginPage(): JSX.Element {
             ) : (
               <>
                 <div className="d-flex justify-content-center mb-5">
-                  <img src="../../../public/SpotChatLogo.png" alt="logo" width="160" height="160" />
+                  <img src="../../../public/SpotChatLogo.png" alt="logo" width="200" height="200" />
                 </div>
                 <h1
                   className="fw-bold mb-4 d-flex justify-content-center"
-                  style={{ color: '#7573f0', textShadow: '0 0 1px rgba(0, 0, 0, 0.11)' }}
+                  style={{ color: '#313131', textShadow: '0 0 1px rgba(0, 0, 0, 0.11)' }}
                 >
                   SpotChat
                 </h1>
@@ -156,6 +156,7 @@ export default function LoginPage(): JSX.Element {
                     style={{
                       backgroundColor: '#7573f0',
                       color: 'white',
+                      borderRadius: '20px',
                     }}
                   >
                     {pathname === '/signup' ? 'Зарегистрироваться' : 'Войти'}
@@ -175,6 +176,7 @@ export default function LoginPage(): JSX.Element {
                         color: '#7573f0',
                         padding: 0,
                         margin: 0,
+                        borderRadius: '20px',
                       }}
                     >
                       Вход

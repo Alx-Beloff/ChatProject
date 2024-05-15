@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BsArrowLeft } from 'react-icons/bs';
 import { getSpotsThunk } from '../../redux/slices/spots/spotsThunks';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import OneSpotCard from '../ui/OneSpotCard';
+import BackIcon from '../../../public/icons8-back-50 black.png';
 
 export default function SpotsPage(): JSX.Element {
   const spots = useAppSelector((store) => store.spots.spots);
@@ -23,21 +23,20 @@ export default function SpotsPage(): JSX.Element {
         className="back-button"
         onClick={() => navigate('/')}
       >
-        <span className="visually-hidden">Назад</span>
-        <BsArrowLeft />
+        <img src={BackIcon} alt="Back Icon" width="30" height="30" />
       </button>
       <div style={{ textAlign: 'center' }}>
-        <h1
+        <div
           style={{
-            fontSize: '2rem',
+            fontSize: '25px',
             fontWeight: 'bold',
-            color: '#000',
-            fontFamily: 'Kanit',
-            textShadow: '2px 2px 4px rgba(128,128,128,0.5)',
+            marginTop: '-10px',
+            marginBottom: '30px',
           }}
         >
-          All Spots
-        </h1>
+          Подключенные заведения
+        </div>
+
         <Box display="flex" flexDirection="column" alignItems="center">
           {spots.map((spot) => (
             <Box mb={2} key={spot.id}>

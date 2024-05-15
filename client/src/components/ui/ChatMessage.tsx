@@ -37,10 +37,10 @@ export default function ChatMessage({ message }): JSX.Element {
             flexDirection: isCurrentUser ? 'row-reverse' : 'row',
             overflowWrap: 'anywhere',
             whiteSpace: 'normal',
-            backgroundColor: isCurrentUser ? '#44d7b6' : '#ffffff',
+            backgroundColor: isCurrentUser ? '#50d5cf' : '#ffffff',
             borderRadius: '20px',
             padding: '10px 20px',
-            boxShadow: '10px 10px 30px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.15)',
           }}
         >
           {!isCurrentUser && (

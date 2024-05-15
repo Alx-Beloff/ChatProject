@@ -11,6 +11,7 @@ export default function ChatComponent({ submitMessage }): JSX.Element {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
+        backgroundColor: '#fcfcfc',
       }}
     >
       <MessagesList />

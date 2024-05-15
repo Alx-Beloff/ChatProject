@@ -29,7 +29,10 @@ export default function MessageForm({ submitMessage }): JSX.Element {
           style={{ borderRadius: '50px' }}
         />
 
-        <button type="submit" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+        <button
+          type="submit"
+          style={{ background: 'none', border: 'none', cursor: 'pointer', marginRight: '-15px' }}
+        >
           <img src={sendIcon} alt="Back Icon" width="50" height="50" />
         </button>
       </InputGroup>

@@ -37,6 +37,7 @@ export default function AppModal({ title }): JSX.Element {
                 borderRadius: '50%',
                 objectFit: 'cover',
                 marginBottom: '20px',
+                marginTop: '-20px',
               }}
               className="rounded-circle"
             />

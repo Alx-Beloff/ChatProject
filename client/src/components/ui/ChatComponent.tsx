@@ -2,7 +2,10 @@ import React from 'react';
 import MessagesList from './MessagesList';
 import MessageForm from './MessageForm';
 
-export default function ChatComponent({ submitMessage }): JSX.Element {
+type ChatComponentProps = {
+  submitMessage: (input: string) => void;
+};
+export default function ChatComponent({ submitMessage }: ChatComponentProps): JSX.Element {
   return (
     <div
       style={{

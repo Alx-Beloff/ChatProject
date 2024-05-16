@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import sendIcon from '../../../public/icons8-send-letter-48.png';
 
-export default function MessageForm({ submitMessage }): JSX.Element {
+type ChatComponentProps = {
+  submitMessage: (input: string) => void;
+};
+
+export default function MessageForm({ submitMessage }: ChatComponentProps): JSX.Element {
   const [input, setInput] = useState('');
-  const changeHandler = (e) => setInput(e.target.value);
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => setInput(e.target.value);
 
   return (
     <Form

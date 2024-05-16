@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { addSpotThunk } from '../../redux/slices/spots/spotsThunks';
 import type { SpotFormType } from '../../types/spotType';
 
 export default function AddSpotForm(): JSX.Element {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [input, setInput] = useState<SpotFormType>({
     name: '',
@@ -23,6 +25,7 @@ export default function AddSpotForm(): JSX.Element {
           e.preventDefault();
           void dispatch(addSpotThunk(input));
           setInput({ name: '', address: '', description: '', img: '' });
+          navigate('/spots');
         }}
       >
         <h2 className="form-title">Добавить новое место</h2>

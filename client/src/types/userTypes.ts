@@ -6,6 +6,7 @@ export type UserType = {
   file: File;
   tel: string;
   role: string;
+  img: string;
 };
 
 export type UserSignUpType = {
@@ -25,4 +26,4 @@ export type AuthStateType = {
 export type UserStateType =
   | { status: 'pending' }
   | { status: 'guest' }
-  | ({ status: 'logged'; img: string; username: string } & UserType);
+  | ({ status: 'logged'; username: string; tel: string } & UserType);

@@ -9,10 +9,11 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutThunk } from '../../redux/slices/auth/authThunks';
 import { getMessagesThunk, getSpotsThunk } from '../../redux/slices/spots/spotsThunks';
 import BackIcon from '../../../public/icons8-back-50 black.png';
+import type { UserStateType } from '../../types/userTypes';
 
 export default function ProfilePage(): JSX.Element {
   const navigate = useNavigate();
-  const user = useAppSelector((store) => store.auth.user);
+  const user: UserStateType = useAppSelector((store) => store.auth.user);
   const dispatch = useAppDispatch();
 
   const spotsId = useAppSelector((store) => store.spots.filtredSpots);
@@ -67,13 +68,14 @@ export default function ProfilePage(): JSX.Element {
                   margin: 'auto',
                 }}
               />
+
               <p
                 style={{
-                  fontSize: '20px',
+                  fontSize: '25px',
                   marginTop: '20px',
                 }}
               >
-                Посещенные места:
+                {newSpots.length !== 0 ? 'Посещенные места' : 'Нет посещенных мест'}
               </p>
             </Col>
           </Row>

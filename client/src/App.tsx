@@ -54,7 +54,7 @@ function App(): JSX.Element {
           element: <PrivateRouter isAllowed={user.status === 'logged' && user.role === 'admin'} />,
           children: [
             {
-              path: '/qr',
+              path: '/qr/:spotId',
               element: <QrCodePage />,
             },
             {

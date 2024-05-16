@@ -28,7 +28,7 @@ export const signUpThunk = createAsyncThunk<AuthStateType, UserSignUpType>(
       const data = await AuthService.signUp(formData);
       return data;
     } catch (error) {
-      const err = error as AxiosError<Error>;
+      const err = error as AxiosError<Error>; 
       return thunkApi.rejectWithValue(err.message);
     }
   },
@@ -41,5 +41,5 @@ export const logoutThunk = createAsyncThunk('auth/logout', async (_, thunkApi) =
     const err = error as AxiosError<Error>;
     return thunkApi.rejectWithValue(err.message);
   }
-  return []
+  return [];
 });

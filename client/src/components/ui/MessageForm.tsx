@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
-import SendIcon from './icons/ChatQuotesIcon';
+import { Form, InputGroup } from 'react-bootstrap';
+import sendIcon from '../../../public/icons8-send-letter-48.png';
 
-export default function MessageForm({ submitMessage }): JSX.Element {
+type ChatComponentProps = {
+  submitMessage: (input: string) => void;
+};
+
+export default function MessageForm({ submitMessage }: ChatComponentProps): JSX.Element {
   const [input, setInput] = useState('');
-  const changeHandler = (e) => setInput(e.target.value);
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => setInput(e.target.value);
 
   return (
     <Form
@@ -14,13 +18,27 @@ export default function MessageForm({ submitMessage }): JSX.Element {
         setInput('');
       }}
     >
-      <InputGroup className="mb-3">
-        <Form.Control placeholder="Your message" value={input} onChange={changeHandler} />
-        <InputGroup.Text id="basic-addon2">
-          <Button variant="outline-primary" type="submit">
-            <SendIcon />
-          </Button>
-        </InputGroup.Text>
+      <InputGroup
+        className="px-3 py-2"
+        style={{
+          backgroundColor: 'white',
+          boxShadow: '0 0 30px rgba(0, 0, 0, 0.12)',
+          clipPath: 'inset(-50px -1px 0px -1px)',
+        }}
+      >
+        <Form.Control
+          placeholder="Сообщение"
+          value={input}
+          onChange={changeHandler}
+          style={{ borderRadius: '50px' }}
+        />
+
+        <button
+          type="submit"
+          style={{ background: 'none', border: 'none', cursor: 'pointer', marginRight: '-15px' }}
+        >
+          <img src={sendIcon} alt="Back Icon" width="50" height="50" />
+        </button>
       </InputGroup>
     </Form>
   );

@@ -1,19 +1,43 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Stack } from 'react-bootstrap';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAppSelector } from '../../redux/hooks';
 import ChatMessage from './ChatMessage';
 
 export default function MessagesList(): JSX.Element {
   const messages = useAppSelector((store) => store.messages.messages);
-  console.log(messages);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView();
+    }
+  }, [messages]);
 
   return (
-    <div className="overflow-auto" style={{ height: '23rem' }}>
-      <Stack>
-        {messages.map((message) => (
-          <ChatMessage message={message} key={message.id}/>
-        ))}
+    <motion.div
+      className="messages-list-wrapper overflow-auto m-"
+      style={{ backgroundColor: '#fcfcfc' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      <Stack gap={2}>
+        <AnimatePresence>
+          {messages.map((message) => (
+            <motion.div
+              key={message.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChatMessage message={message} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </Stack>
-    </div>
+      <div ref={messagesEndRef} />
+    </motion.div>
   );
 }

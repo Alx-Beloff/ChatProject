@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import messagesReducer from './slices/messages/messagesSlice';
 import authReducer from './slices/auth/authSlice';
+import spotsReducer from './slices/spots/spotsSlice';
 
 export const store = configureStore({
   reducer: {
     messages: messagesReducer,
     auth: authReducer,
+    spots: spotsReducer,
   },
 });
 

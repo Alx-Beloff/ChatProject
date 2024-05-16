@@ -42,7 +42,7 @@ module.exports = {
         },
         {
           name: 'бутекмп "Elbrus"',
-          address: 'ул.Орджоникидзе, д. 11 стр. 10',
+          address: 'Москва, ул.Орджоникидзе, д. 11 стр. 10',
           description:
             'Эльбрус Буткемп — первая и самая крупная в России школа программирования в формате буткемпа.',
           img: 'https://sun9-41.userapi.com/impg/yeAev9lO7AwlfZhdfvf_-R8e00gQ0vecmPOwyg/azD-8C8bBuY.jpg?size=2560x2560&quality=95&sign=89b87f6fcea73e4739d006be269d362d&type=album',

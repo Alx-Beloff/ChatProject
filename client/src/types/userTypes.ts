@@ -3,19 +3,20 @@ export type UserType = {
   username: string;
   email: string;
   password: string;
-  img: string;
+  file: File;
   tel: string;
   role: string;
+  img: string;
 };
 
 export type UserSignUpType = {
   username: string;
   email: string;
   password: string;
-  img: string;
+  file: File;
   tel: string;
 };
-export type UserLoginType = Omit<UserSignUpType, 'username' | 'img' | 'tel'>;
+export type UserLoginType = Omit<UserSignUpType, 'username' | 'file' | 'tel'>;
 
 export type AuthStateType = {
   accessToken: string;
@@ -25,4 +26,4 @@ export type AuthStateType = {
 export type UserStateType =
   | { status: 'pending' }
   | { status: 'guest' }
-  | ({ status: 'logged' } & UserType);
+  | ({ status: 'logged'; username: string; tel: string } & UserType);

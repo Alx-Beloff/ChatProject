@@ -31,7 +31,6 @@ router.post('/signup', upload.single('file'), async (req, res) => {
         });
 
         if (!created) {
-          
           return res.status(400).json({ message: 'Пользователь с таким email уже существует' });
         }
 
@@ -115,12 +114,23 @@ router.post('/login', async (req, res) => {
   return res.sendStatus(500);
 });
 
+// Обработчик маршрута /logout
 router.get('/logout', (req, res) => {
-  res.clearCookie('refreshToken').sendStatus(200);
+  try {
+    res.clearCookie('refreshToken').sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
 });
 
+// Обработчик маршрута /check
 router.get('/check', verifyRefreshToken, (req, res) => {
-  res.json({ user: res.locals.user });
+  try {
+    res.json({ user: res.locals.user });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
 });
-
 module.exports = router;

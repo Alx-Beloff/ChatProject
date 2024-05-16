@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Form, InputGroup } from 'react-bootstrap';
 import sendIcon from '../../../public/icons8-send-letter-48.png';
 
 export default function MessageForm({ submitMessage }): JSX.Element {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Stack } from 'react-bootstrap';
 import MessagesList from './MessagesList';
 import MessageForm from './MessageForm';
 

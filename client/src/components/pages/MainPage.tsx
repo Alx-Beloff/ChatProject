@@ -105,7 +105,7 @@ export default function MainPage(): JSX.Element {
                 }}
                 onClick={() => navigate('/adminPage')}
               >
-                Админка
+                Добавить место
               </Button>
             )}
           </Col>
@@ -156,7 +156,7 @@ export default function MainPage(): JSX.Element {
               }}
               onClick={() => navigate('/spots')}
             >
-              <BsBuilding style={{ marginRight: '5px', marginBottom: '5px' }} /> Все заведения
+              <BsBuilding style={{ marginRight: '5px', marginBottom: '5px' }} /> Все места
             </Button>
           </Col>
         </div>

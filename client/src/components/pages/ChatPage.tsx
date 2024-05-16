@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import ChatComponent from '../ui/ChatComponent';
 import { useAppDispatch } from '../../redux/hooks';
 import { setMessages, setUsers } from '../../redux/slices/messages/messagesSlice';
@@ -9,8 +10,13 @@ import AppModal from '../ui/AppModal';
 
 type MessageData = {
   type: string;
-  payload: any;
+  payload: PayloadAction;
 };
+
+// type ChatComponentProps = {
+//   submitMessage: (input: string) => void;
+//   socketRef: React.MutableRefObject<WebSocket | null>;
+// };
 
 export default function ChatPage(): JSX.Element {
   const socketRef = useRef<WebSocket | null>(null);
@@ -44,7 +50,7 @@ export default function ChatPage(): JSX.Element {
     };
   }, [dispatch, spotId]);
 
-  const submitMessage = (input: string) => {
+  const submitMessage = (input: string): void => {
     if (input.trim() !== '') {
       const socket = socketRef.current;
       if (socket && socket.readyState === WebSocket.OPEN) {

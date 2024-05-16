@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Col, Button, Row, Container, Form, FloatingLabel } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
-import type { UserLoginType, UserSignUpType } from '../../types/userTypes';
+import type { UserSignUpType } from '../../types/userTypes';
 import { loginThunk, signUpThunk } from '../../redux/slices/auth/authThunks';
 import { setError } from '../../redux/slices/auth/authSlice';
 
@@ -38,27 +38,27 @@ export default function LoginPage(): JSX.Element {
     const formData = Object.fromEntries(new FormData(e.currentTarget)) as UserSignUpType;
 
     if (formData.email.length < 3) {
-      return dispatch(setError('Введите email'));
+      return void dispatch(setError('Введите email'));
     }
     if (formData.password === '') {
-      return dispatch(setError('Введите пароль'));
+      return void dispatch(setError('Введите пароль'));
     }
     if (formData.password && formData.password.length < 6) {
-      return dispatch(setError('Пароль должен быть не менее 6 символов'));
+      return void dispatch(setError('Пароль должен быть не менее 6 символов'));
     }
 
     if (pathname === '/signup') {
       if (!formData.username || formData.username.length < 1) {
-        return dispatch(setError('Введите имя чтобы зарегистрироваться'));
+        return void dispatch(setError('Введите имя чтобы зарегистрироваться'));
       }
       if (formData.username && formData.username.length > 30) {
-        return dispatch(setError('Имя должно быть не более 30 символов'));
+        return void dispatch(setError('Имя должно быть не более 30 символов'));
       }
       if (formData.tel && formData.tel === '+7') {
-        return dispatch(setError('Введите номер телефона чтобы зарегистрироваться'));
+        return void dispatch(setError('Введите номер телефона чтобы зарегистрироваться'));
       }
       if (formData.tel && !/^.{18}$/.test(formData.tel)) {
-        return dispatch(setError('Телефон должен быть в формате +7 (999) 999 99-99'));
+        return void dispatch(setError('Телефон должен быть в формате +7 (999) 999 99-99'));
       }
       void dispatch(signUpThunk(formData));
     } else {

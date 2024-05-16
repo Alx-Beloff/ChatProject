@@ -1,11 +1,15 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useAppSelector } from '../../redux/hooks';
+import type { MessageType } from '../../types/messageType';
 
-export default function ChatMessage({ message }): JSX.Element {
+type ChatComponentProps = {
+  message: MessageType;
+};
+export default function ChatMessage({ message }: ChatComponentProps): JSX.Element {
   const loggedUser = useAppSelector((store) => store.auth.user);
-
-  const isCurrentUser = message.User.username === loggedUser.username;
+  const isCurrentUser =
+    loggedUser.status === 'logged' && message.User.username === loggedUser.username;
   const messageAlignment = isCurrentUser ? 'flex-end' : 'flex-start';
 
   const messageTime = message.updatedAt

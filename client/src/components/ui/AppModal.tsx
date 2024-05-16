@@ -13,7 +13,7 @@ export default function AppModal(): JSX.Element {
   const users = useAppSelector((store) => store.messages.users);
   const usersFlat = users.flat();
 
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
 
   const handleModalClose = (): void => {
     setSelectedUser(null); // Сбросить выбранного пользователя при закрытии модального окна
@@ -21,7 +21,7 @@ export default function AppModal(): JSX.Element {
   };
 
   const handleUserClick = (user: UserType | null): void => {
-    setSelectedUser((prevUser) => (prevUser && prevUser.id === user.id ? null : user));
+    setSelectedUser((prevUser) => (prevUser && user && prevUser.id === user.id ? null : user));
   };
 
   const convertPhoneNumber = (phoneNumber: string): null | string => {
@@ -38,10 +38,11 @@ export default function AppModal(): JSX.Element {
     return formatted;
   };
   const handleTelegramClick = (): void => {
-    window.open(`https://t.me/${convertPhoneNumber(selectedUser.tel)}`, '_blank');
+    if (selectedUser) window.open(`https://t.me/${convertPhoneNumber(selectedUser.tel)}`, '_blank');
   };
   const handleWA = (): void => {
-    window.open(`https://wa.me/${convertPhoneNumber(selectedUser.tel)}`, '_blank');
+    if (selectedUser)
+      window.open(`https://wa.me/${convertPhoneNumber(selectedUser.tel)}`, '_blank');
   };
   return (
     <Modal show={show} onHide={handleModalClose}>

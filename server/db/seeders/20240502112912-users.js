@@ -19,7 +19,7 @@ module.exports = {
         {
           username: 'Admin',
           email: 'admin@spotchat.com',
-          password: await bcrypt.hash('123456', 11),
+          password: await bcrypt.hash('hdmi123456+', 11),
           img: `http://${process.env.DB_HOST}:${process.env.PORT}/img/adminAvatar.jpeg`,
           tel: '+7 (777) 777 77-77',
           role: 'admin',

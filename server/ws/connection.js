@@ -87,7 +87,7 @@ const connectionCb = async (socket, request) => {
       ws.send(
         JSON.stringify({
           type: 'SET_USERS_FROM_SERVER',
-          payload: { users: [...map.get(spotId).values()].map(({ user }) => user) },
+          payload: [...map.get(spotId).values()].map(({ user }) => user),
         }),
       ),
     );

@@ -24,7 +24,7 @@ router.post('/signup', upload.single('file'), async (req, res) => {
           defaults: {
             username,
             password: await bcrypt.hash(password, 10),
-            img: `http://${process.env.DB_HOST}:${process.env.PORT}/img/defaultAvatar.png`,
+            img: 'https://spotchat.mooo.com/img/defaultAvatar.png',
             tel,
             role,
           },
@@ -57,7 +57,7 @@ router.post('/signup', upload.single('file'), async (req, res) => {
         defaults: {
           username,
           password: await bcrypt.hash(password, 10),
-          img: `http://${process.env.DB_HOST}:${process.env.PORT}/img/${imgName}`,
+          img: `https://spotchat.mooo.com/img/${imgName}`,
           tel,
           role,
         },

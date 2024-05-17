@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../redux/hooks';
 import type { UserSignUpType } from '../../types/userTypes';
 import { loginThunk, signUpThunk } from '../../redux/slices/auth/authThunks';
 import { setError } from '../../redux/slices/auth/authSlice';
+import spotchatIcon from '../../../public/SpotChatLogo.png';
 
 export default function LoginPage(): JSX.Element {
   const { pathname } = useLocation();
@@ -74,7 +75,7 @@ export default function LoginPage(): JSX.Element {
             {pathname === '/signup' ? (
               <>
                 <div className="d-flex justify-content-center mb-4">
-                  <img src="../../../public/SpotChatLogo.png" alt="logo" width="160" height="160" />
+                  <img src={spotchatIcon} alt="logo" width="160" height="160" />
                 </div>
                 <h2
                   className="fw-bold mb-4 d-flex justify-content-center"
@@ -92,7 +93,7 @@ export default function LoginPage(): JSX.Element {
             ) : (
               <>
                 <div className="d-flex justify-content-center mb-5">
-                  <img src="../../../public/SpotChatLogo.png" alt="logo" width="200" height="200" />
+                  <img src={spotchatIcon} alt="logo" width="200" height="200" />
                 </div>
                 <h1
                   className="fw-bold mb-4 d-flex justify-content-center"

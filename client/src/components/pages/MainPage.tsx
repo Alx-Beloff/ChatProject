@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Html5Qrcode } from 'html5-qrcode';
 import { useAppSelector } from '../../redux/hooks';
 import qrImage from '../../../public/qrImg.png';
+import spotchatLogo from '../../../public/SpotChatLogo.png';
 
 export default function MainPage(): JSX.Element {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ export default function MainPage(): JSX.Element {
       <Container>
         <Row className="justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
           <Col xs={12} className="text-center">
-            <img src="../../../public/SpotChatLogo.png" alt="logo" width="200" height="200" />
+            <img src={spotchatLogo} alt="logo" width="100" height="100" />
             <h1
               className="mainPage-h1"
               style={{

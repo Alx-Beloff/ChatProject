@@ -4,9 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
     "dev": "nodemon app.js -e js,json ",
-    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "db:drop": "NODE_ENV=production sequelize db:drop",
+    "db:setup": "NODE_ENV=production sequelize db:create && NODE_ENV=production sequelize db:migrate && NODE_ENV=production sequelize db:seed:all",
+    "start": "NODE_ENV=production node app.js"
   },
   "keywords": [],
   "author": "",

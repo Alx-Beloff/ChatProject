@@ -5,6 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const { createServer } = require('http');
+const path = require('path');
 const config = require('./config/serverConfig');
 const indexRouter = require('./routes/index.routes');
 const { upgradeCb, wss } = require('./ws/upgrade');
@@ -20,10 +21,15 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 config(app);
 
 app.use('/', indexRouter);
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 const server = createServer(app);
 

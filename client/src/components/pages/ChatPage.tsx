@@ -32,6 +32,8 @@ export default function ChatPage(): JSX.Element {
           break;
 
         case 'ADD_MESSAGE_FROM_SERVER':
+          dispatch(setMessages(payload as MessageType));
+          break;
         case 'SET_HISTORY_FROM_SERVER':
           dispatch(setMessages(payload as MessageType));
           break;
